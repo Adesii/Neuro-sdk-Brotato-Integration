@@ -28,20 +28,20 @@ func _validate(_command: String, message_data, state: Dictionary): # -> Executio
 	if action == null:
 		if get_tree().root.get_node(ACTIONHANDLER_NODE_PATH).is_recently_unregistered(action_name):
 			return load("res://mods-unpacked/Adesi-NeuroIntegration/neuro-sdk/websocket/execution_result.gd").failure("This action has been recently unregistered and can no longer be used.")
-		return load("res://mods-unpacked/Adesi-NeuroIntegration/neuro-sdk/websocket/execution_result.gd").failure(F"Action failed. Unknown action '%s'." % action_name)
+		return load("res://mods-unpacked/Adesi-NeuroIntegration/neuro-sdk/websocket/execution_result.gd").failure("Action failed. Unknown action '%s'." % action_name)
 
 	state["_action_instance"] = action;
 
-	var json = JSON.new()
-	var error = json.parse(action_stringified_data)
+	var json = JSON.parse(action_stringified_data)
+	var error = json.error
 	if error != OK:
 		return load("res://mods-unpacked/Adesi-NeuroIntegration/neuro-sdk/websocket/execution_result.gd").failure("Action failed. Could not parse action parameters from JSON.")
 
-	if typeof(json.data) != TYPE_DICTIONARY:
+	if typeof(json.result) != TYPE_DICTIONARY:
 		push_error("Action data can only be a dictionary. Other respones are not permitted for the API implementation in Godot.")
 		return load("res://mods-unpacked/Adesi-NeuroIntegration/neuro-sdk/websocket/execution_result.gd").failure("Action failed. Could not parse action parameters from JSON.")
 
-	var action_data = load("res://mods-unpacked/Adesi-NeuroIntegration/neuro-sdk/messages/api/incoming_data.gd").new(json.data)
+	var action_data = load("res://mods-unpacked/Adesi-NeuroIntegration/neuro-sdk/messages/api/incoming_data.gd").new(json.result)
 
 	var result = action.validate(action_data, state)
 	return result

@@ -84,6 +84,8 @@ func _ws_start() -> void:
 
 		#connection_failed.emit(err)
 		emit_signal("connection_failed", err)
+	
+	_socket.get_peer(1).set_write_mode(WebSocketPeer.WRITE_MODE_TEXT)
 
 
 func _ws_reconnect() -> void:
@@ -95,18 +97,18 @@ func _ws_reconnect() -> void:
 func _ws_read() -> void:
 	while _socket.get_peer(1).get_available_packet_count():
 		var messageStr: String = _socket.get_peer(1).get_packet().get_string_from_utf8()
-		var json: JSON = JSON.new()
-		var error = json.parse(messageStr)
+		var json = JSON.parse(messageStr)
+		var error = json.error
 		if error != OK:
 			push_error("Could not parse websocket message: %s" % [messageStr])
 			push_error("JSON Parse Error: %s at line %d" % [json.get_error_message(), json.get_error_line()])
 			continue
 
-		if typeof(json.data) != TYPE_DICTIONARY:
+		if typeof(json.result) != TYPE_DICTIONARY:
 			push_error("Websocket message is not a dictionary: %s" % [messageStr])
 			continue
 
-		var message = load("res://mods-unpacked/Adesi-NeuroIntegration/neuro-sdk/messages/api/incoming_data.gd").new(json.data)
+		var message = load("res://mods-unpacked/Adesi-NeuroIntegration/neuro-sdk/messages/api/incoming_data.gd").new(json.result)
 
 		var command = message.get_string("command")
 		if not command:

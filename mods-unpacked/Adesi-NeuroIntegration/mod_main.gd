@@ -71,6 +71,9 @@ func add_child_nodes():
 	action_handler.name = "NeuroActionHandlerNode"
 	add_child(action_handler)
 
+	var main = load("res://mods-unpacked/Adesi-NeuroIntegration/main.gd").new(self)
+	main.name = "IntegrationMainNode"
+
 func install_script_extensions() -> void:
 	# ! any script extensions should go in this directory, and should follow the same directory structure as vanilla
 	extensions_dir_path = mod_dir_path.plus_file("extensions")
@@ -99,7 +102,7 @@ func add_translations() -> void:
 func _ready() -> void:
 	ModLoaderLog.info("Ready", AUTHORNAME_MODNAME_LOG_NAME)
 
-	load("res://mods-unpacked/Adesi-NeuroIntegration/neuro-sdk/messages/outgoing/context.gd").send("test")
+	#load("res://mods-unpacked/Adesi-NeuroIntegration/neuro-sdk/messages/outgoing/context.gd").send("test")
 
 	# ! This uses Godot's native `tr` func, which translates a string. You'll
 	# ! find this particular string in the example CSV here: translations/modname.csv

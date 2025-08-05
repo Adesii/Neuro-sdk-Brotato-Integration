@@ -17,7 +17,7 @@ static func failure(message_: String):
 	return load("res://mods-unpacked/Adesi-NeuroIntegration/neuro-sdk/websocket/execution_result.gd").new(false, message_)
 
 static func vedal_failure(message_: String):
-	return failure(message_ + Strings.action_failed_vedal_fault_suffix)
+	return failure(message_ + " (This is probably not your fault, blame Vedal.)")
 
 static func mod_failure(message_: String):
-	return failure(message_ + Strings.action_failed_mod_fault_suffix)
+	return failure(message_ + " (This is probably not your fault, blame the game integration.)")

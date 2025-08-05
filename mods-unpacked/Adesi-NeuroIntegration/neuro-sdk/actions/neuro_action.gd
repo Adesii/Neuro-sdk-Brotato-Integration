@@ -2,6 +2,11 @@ class_name NeuroAction
 
 var _action_window
 
+var JsonUtils = preload("res://mods-unpacked/Adesi-NeuroIntegration/json_utils.gd")
+var ExecutionResult = preload("res://mods-unpacked/Adesi-NeuroIntegration/neuro-sdk/websocket/execution_result.gd")
+var Strings = preload("res://mods-unpacked/Adesi-NeuroIntegration/neuro-sdk/strings.gd")
+var Context = preload("res://mods-unpacked/Adesi-NeuroIntegration/neuro-sdk/messages/outgoing/context.gd")
+
 func _init(action_window): # : ActionWindow
 	_action_window = action_window
 
@@ -39,7 +44,7 @@ func _can_be_used() -> bool:
 
 func _validate_action(_data, _state: Dictionary): # : IncomingData -> ExecutionResult
 	push_error("Action._validate_action() is not implemented.")
-	return load("res://mods-unpacked/Adesi-NeuroIntegration/neuro-sdk/websocket/execution_result.gd").mod_failure("Action._validate_action() is not implemented.")
+	return ExecutionResult.mod_failure("Action._validate_action() is not implemented.")
 
 func _execute_action(_state: Dictionary) -> void:
 	push_error("Action._execute_action() is not implemented.")
