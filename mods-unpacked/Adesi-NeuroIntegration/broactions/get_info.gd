@@ -12,10 +12,10 @@ func _init(window, basis, what).(window):
 
 
 func _get_name():
-	return "get_info_in_" + what_is_being_selected
+	return "info_for_" + what_is_being_selected
 
 func _get_description():
-	return "Get information about an item from the list. before selecting it. This action is useful for previewing the item before making a decision."
+	return "Get information about an item from the list. before choosing it. This action is useful for previewing the item before making a decision."
 
 func _get_schema():
 	return JsonUtils.wrap_schema({

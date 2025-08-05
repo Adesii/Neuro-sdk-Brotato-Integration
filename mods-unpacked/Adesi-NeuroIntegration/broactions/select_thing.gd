@@ -10,10 +10,10 @@ func _init(window, basis, what).(window):
 	what_is_being_selected = what
 
 func _get_name():
-	return "select_" + what_is_being_selected
+	return "choose_" + what_is_being_selected
 
 func _get_description():
-	return "Select an item from the list."
+	return "Choses an item from the list"
 
 func _get_schema():
 	return JsonUtils.wrap_schema({
