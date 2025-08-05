@@ -28,7 +28,7 @@ func _validate(_command: String, message_data, state: Dictionary): # -> Executio
 	if action == null:
 		if get_tree().root.get_node(ACTIONHANDLER_NODE_PATH).is_recently_unregistered(action_name):
 			return load("res://mods-unpacked/Adesi-NeuroIntegration/neuro-sdk/websocket/execution_result.gd").failure("This action has been recently unregistered and can no longer be used.")
-		return load("res://mods-unpacked/Adesi-NeuroIntegration/neuro-sdk/websocket/execution_result.gd").failure(FormatString.new("Action failed. Unknown action '%s'.").format([action_name]))
+		return load("res://mods-unpacked/Adesi-NeuroIntegration/neuro-sdk/websocket/execution_result.gd").failure(F"Action failed. Unknown action '%s'." % action_name)
 
 	state["_action_instance"] = action;
 
