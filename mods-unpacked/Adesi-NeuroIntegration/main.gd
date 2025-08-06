@@ -32,7 +32,7 @@ func _ready():
 	var character_select = get_tree().current_scene
 
 	var action_window = ActionWindow.new(self)
-	action_window.set_force(200, "Select a character you want to play", "", false)
+	action_window.set_force(60, "Select a character you want to play, Use the info action before the select action if you want to know what the character can do and its stats. you can use the select action any amount of times you want on any character", "")
 	action_window.add_action(SelectAction.new(action_window, character_select, "character"))
 
 	var characterinfo_action = InfoAction.new(null, character_select, "character_selection")
@@ -51,7 +51,7 @@ func _ready():
 	var weapon_select = get_tree().current_scene
 
 	var weaponaction_window = ActionWindow.new(self)
-	weaponaction_window.set_force(200, "Now please select what weapon you want to start with", "", false)
+	weaponaction_window.set_force(60, "Now please select what weapon you want to start with, Use the info action before the select action if you want to know what the weapon can do and its stats. you can use the select action any amount of times you want on any weapon", "")
 	weaponaction_window.add_action(SelectAction.new(weaponaction_window, weapon_select, "weapon"))
 	var info_action = InfoAction.new(null, weapon_select, "weapon_selection")
 	NeuroActionHandler.register_actions([info_action])
