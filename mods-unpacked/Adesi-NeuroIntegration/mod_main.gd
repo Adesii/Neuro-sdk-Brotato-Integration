@@ -36,41 +36,17 @@ func _init() -> void:
 
 	add_child_nodes()
 
-	#ModLoaderMod.register_global_classes_from_array([ {
-	#"base": "Node",
-	#"class": "Websocket",
-	#"language": "GDScript",
-	#"path": "res://mods-unpacked/Adesi-NeuroIntegration/neuro-sdk/websocket/websocket.gd"
-	#}, {
-	#"base": "Node",
-	#"class": "NeuroActionHandler",
-	#"language": "GDScript",
-	#"path": "res://mods-unpacked/Adesi-NeuroIntegration/neuro-sdk/actions/neuro_action.gd"
-	#}])
-
-	#ModLoaderMod.register_global_classes_from_array([ {
-	#"base": "Node",
-	#"class": "Websocket",
-	#"language": "GDScript",
-	#"path": "res://mods-unpacked/Adesi-NeuroIntegration/neuro-sdk/websocket/Websocket.gd"
-	#}, {
-	#"base": "Node",
-	#"class": "NeuroActionHandler",
-	#"language": "GDScript",
-	#"path": "res://mods-unpacked/Adesi-NeuroIntegration/neuro-sdk/actions/neuro_action_handler.gd"
-	#}])
-
-	#Modloader.get_autoload_array
-
+var action_handler
 func add_child_nodes():
 	var websocket = load("res://mods-unpacked/Adesi-NeuroIntegration/neuro-sdk/websocket/websocket.gd").new()
 	websocket.name = "WebsocketNode"
 	add_child(websocket)
 
-	var action_handler = load("res://mods-unpacked/Adesi-NeuroIntegration/neuro-sdk/actions/neuro_action_handler.gd").new()
+	action_handler = load("res://mods-unpacked/Adesi-NeuroIntegration/neuro-sdk/actions/neuro_action_handler.gd").new()
 	action_handler.name = "NeuroActionHandlerNode"
 	add_child(action_handler)
 
+	
 	var main = load("res://mods-unpacked/Adesi-NeuroIntegration/main.gd").new(self)
 	main.name = "IntegrationMainNode"
 
@@ -79,7 +55,11 @@ func install_script_extensions() -> void:
 	extensions_dir_path = mod_dir_path.plus_file("extensions")
 
 	# ? Brief description/reason behind this edit of vanilla code...
-	#ModLoaderMod.install_script_extension(extensions_dir_path.plus_file("main.gd"))
+	ModLoaderMod.install_script_extension(extensions_dir_path.plus_file("utils_ext.gd"))
+	ModLoaderMod.install_script_extension(extensions_dir_path.plus_file("character_select_ext.gd"))
+	ModLoaderMod.install_script_extension(extensions_dir_path.plus_file("weapon_select_ext.gd"))
+	ModLoaderMod.install_script_extension(extensions_dir_path.plus_file("difficulty_select_ext.gd"))
+	ModLoaderMod.install_script_extension(extensions_dir_path.plus_file("player_movement_behavior_ext.gd"))
 	#ModLoaderMod.install_script_extension(ext_dir + "entities/units/player/player.gd") # ! Note that this file does not exist in this example mod
 
 	# ! Add extensions (longform version of the above)
@@ -101,6 +81,8 @@ func add_translations() -> void:
 
 func _ready() -> void:
 	ModLoaderLog.info("Ready", AUTHORNAME_MODNAME_LOG_NAME)
+
+	Utils.NeuroActionHandler = action_handler
 
 	#load("res://mods-unpacked/Adesi-NeuroIntegration/neuro-sdk/messages/outgoing/context.gd").send("test")
 
