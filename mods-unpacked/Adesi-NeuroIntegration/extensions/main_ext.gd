@@ -19,7 +19,7 @@ func _physics_process(delta):
 	seconds += delta
 	if seconds >= 1.0:
 		seconds = 0.0
-		Context.send("Your current position: %s, Your current Health: %s, Current Enemy Count: %s" % [_players[0].global_position, RunData.get_player_current_health(0), RunData.current_living_enemies])
+		Context.send("Your current position: %s, Your current Health: %s, Current Enemy Count: %s" % [_players[0].global_position, RunData.get_player_current_health(0), RunData.current_living_enemies], true)
 	
 
 func _exit_tree():
