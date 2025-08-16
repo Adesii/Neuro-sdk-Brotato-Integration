@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 300.0
+
+[node name="player_add_in" type="Node2D"]
+
+[node name="detection_range" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 5
+monitorable = false
+
+[node name="detection_shape" type="CollisionShape2D" parent="detection_range"]
+shape = SubResource( 1 )

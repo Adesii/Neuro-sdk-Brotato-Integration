@@ -7,16 +7,13 @@ var SelectAction = preload("res://mods-unpacked/Adesi-NeuroIntegration/broaction
 var InfoAction = preload("res://mods-unpacked/Adesi-NeuroIntegration/broactions/get_info.gd")
 
 enum MoveMode {
-    MovePattern,
+    KeepDistance,
     RunToClosestEnemy,
-    RunAwayFromClosestEnemy,
     MoveTo,
-    MoveCustom
-}
-var move_mode = MoveMode.MovePattern
-enum MovePattern {
+    #MoveCustom,
     Circle,
-    Spiral,
     Random,
+    Idle
 }
-var pattern_move = MovePattern.Circle
+var move_mode = MoveMode.KeepDistance
+var move_to_target: Vector2

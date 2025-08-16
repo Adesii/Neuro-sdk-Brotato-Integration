@@ -60,6 +60,8 @@ func install_script_extensions() -> void:
 	ModLoaderMod.install_script_extension(extensions_dir_path.plus_file("weapon_select_ext.gd"))
 	ModLoaderMod.install_script_extension(extensions_dir_path.plus_file("difficulty_select_ext.gd"))
 	ModLoaderMod.install_script_extension(extensions_dir_path.plus_file("player_movement_behavior_ext.gd"))
+	ModLoaderMod.install_script_extension(extensions_dir_path.plus_file("player_ext.gd"))
+	ModLoaderMod.install_script_extension(extensions_dir_path.plus_file("main_ext.gd"))
 	#ModLoaderMod.install_script_extension(ext_dir + "entities/units/player/player.gd") # ! Note that this file does not exist in this example mod
 
 	# ! Add extensions (longform version of the above)
