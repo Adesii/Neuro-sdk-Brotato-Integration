@@ -1,7 +1,7 @@
 extends "res://main.gd"
 
-var MoveAction = load("res://mods-unpacked/Adesi-NeuroIntegration/broactions/move_selection.gd")
-var MoveLocationAction = load("res://mods-unpacked/Adesi-NeuroIntegration/broactions/move_to_location.gd")
+var MoveAction = load("res://mods-unpacked/Adesi-NeuroIntegration/broactions/main_stage/move_selection.gd")
+var MoveLocationAction = load("res://mods-unpacked/Adesi-NeuroIntegration/broactions/main_stage/move_to_location.gd")
 
 var move_action
 var move_to_action

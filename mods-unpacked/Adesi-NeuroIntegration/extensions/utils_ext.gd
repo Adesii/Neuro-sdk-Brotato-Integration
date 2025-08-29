@@ -3,8 +3,8 @@ extends "res://singletons/utils.gd"
 var Context = preload("res://mods-unpacked/Adesi-NeuroIntegration/neuro-sdk/messages/outgoing/context.gd")
 var ActionWindow = preload("res://mods-unpacked/Adesi-NeuroIntegration/neuro-sdk/actions/action_window.gd")
 var NeuroActionHandler
-var SelectAction = preload("res://mods-unpacked/Adesi-NeuroIntegration/broactions/select_thing.gd")
-var InfoAction = preload("res://mods-unpacked/Adesi-NeuroIntegration/broactions/get_info.gd")
+var SelectAction = preload("res://mods-unpacked/Adesi-NeuroIntegration/broactions/main_menu/select_thing.gd")
+var InfoAction = preload("res://mods-unpacked/Adesi-NeuroIntegration/broactions/main_menu/get_info.gd")
 
 enum MoveMode {
     KeepDistance,
