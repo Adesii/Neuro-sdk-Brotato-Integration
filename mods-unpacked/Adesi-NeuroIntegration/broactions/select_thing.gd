@@ -13,7 +13,7 @@ func _get_name():
 	return "choose_" + what_is_being_selected
 
 func _get_description():
-	return "Choses an {what_is_being_selected} from the list."
+	return "Choses an %s from the list." % [what_is_being_selected]
 
 func _get_schema():
 	return JsonUtils.wrap_schema({

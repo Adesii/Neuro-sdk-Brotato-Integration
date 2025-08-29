@@ -15,7 +15,8 @@ func _get_name():
 	return what_is_being_selected + "_info"
 
 func _get_description():
-	return "Get information about an {what_is_being_selected}. before choosing it. This action is useful for previewing the item before making a decision. it can be used any amount of times"
+	return "Get information about an %s. before choosing it. This action is useful for previewing the item before making a decision. it can be used any amount of times" % [what_is_being_selected]
+
 
 func _get_schema():
 	return JsonUtils.wrap_schema({
