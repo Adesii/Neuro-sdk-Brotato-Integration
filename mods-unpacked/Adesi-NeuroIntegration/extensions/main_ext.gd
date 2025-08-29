@@ -13,14 +13,21 @@ func _enter_tree():
 
 
 var seconds = 0.0
+var unregistered_actions := false
 
 func _physics_process(delta):
 	._physics_process(delta)
+
 	seconds += delta
-	if seconds >= 1.0:
+	if seconds >= 5.0:
 		seconds = 0.0
 		Context.send("Your current position: %s, Your current Health: %s, Current Enemy Count: %s" % [_players[0].global_position, RunData.get_player_current_health(0), RunData.current_living_enemies], true)
-	
+
+func clean_up_room():
+    .clean_up_room()
+    _exit_tree()
 
 func _exit_tree():
-	Utils.NeuroActionHandler.unregister_actions([move_action, move_to_action])
+    if not unregistered_actions:
+        Utils.NeuroActionHandler.unregister_actions([move_action, move_to_action])
+        unregistered_actions = true
