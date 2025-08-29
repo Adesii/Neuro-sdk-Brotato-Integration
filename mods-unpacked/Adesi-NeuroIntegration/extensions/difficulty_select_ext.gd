@@ -11,7 +11,8 @@ func _ready():
 		difficulty_button.emit_signal("pressed")
 	else:
 		var difficulty_action_window = Utils.ActionWindow.new(self)
-		difficulty_action_window.set_force(5, "Select what difficulty you want to play (they are very different!)", "", false)
+		#difficulty_action_window.set_force(5, "Select what difficulty you want to play (they are very different!)", "", false)
+		difficulty_action_window.set_context("Select what difficulty you want to play (they are very different!)", false)
 		difficulty_action_window.add_action(Utils.SelectAction.new(difficulty_action_window, self, "difficulty"))
 		difficulty_action_window.register()
 	
