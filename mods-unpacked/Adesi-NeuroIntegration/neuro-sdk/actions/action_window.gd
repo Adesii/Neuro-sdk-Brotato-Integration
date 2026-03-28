@@ -13,6 +13,7 @@ var _force_timeout: float
 var _action_force_query: String
 var _action_force_state: String
 var _action_force_ephemeral_context: bool
+var _action_force_priority
 var _end_enabled: bool = false
 var _end_timeout: float
 var _actions: Array = [] # [NeuroAction]
@@ -24,7 +25,7 @@ var _timer: float = 0
 func _init(parent: Node):
 	parent.add_child(self)
 
-func set_force(timeout: float, query: String, state: String, ephemeral_context: bool = false) -> void:
+func set_force(timeout: float, query: String, state: String, ephemeral_context: bool = false,priority = ActionsForce.Priority.LOW) -> void:
 	if !_validate_frozen():
 		return
 
@@ -33,6 +34,7 @@ func set_force(timeout: float, query: String, state: String, ephemeral_context: 
 	_action_force_query = query
 	_action_force_state = state
 	_action_force_ephemeral_context = ephemeral_context
+	_action_force_priority = priority
 
 func set_end(end_timeout: float) -> void:
 	if !_validate_frozen():
@@ -108,7 +110,7 @@ func _send_force() -> void:
 	#array.assign(_actions.map(func(action: NeuroAction) -> String: return action.get_name()))
 	for action in _actions:
 		array.append(action.get_name())
-	get_tree().root.get_node("/root/ModLoader/Adesi-NeuroIntegration/WebsocketNode").send(load("res://mods-unpacked/Adesi-NeuroIntegration/neuro-sdk/messages/outgoing/actions_force.gd").new(_action_force_query, _action_force_state, _action_force_ephemeral_context, array))
+	get_tree().root.get_node("/root/ModLoader/Adesi-NeuroIntegration/WebsocketNode").send(load("res://mods-unpacked/Adesi-NeuroIntegration/neuro-sdk/messages/outgoing/actions_force.gd").new(_action_force_query, _action_force_state, _action_force_ephemeral_context, array,_action_force_priority))
 
 func _end() -> void:
 	get_tree().root.get_node("/root/ModLoader/Adesi-NeuroIntegration/NeuroActionHandlerNode").unregister_actions(_actions)
