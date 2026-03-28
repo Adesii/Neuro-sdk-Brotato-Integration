@@ -16,7 +16,7 @@ func _get_schema():
 	return JsonUtils.wrap_schema({})
 
 func _validate_action(data, state):
-	if _button == null:
+	if not is_instance_valid(_button):
 		return ExecutionResult.mod_failure("Reroll button doesn't exist for neuro")
 	if RunData.get_player_gold(0) < _price:
 		return ExecutionResult.failure("Not enough money to reroll the shop")

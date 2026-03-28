@@ -17,7 +17,7 @@ func can_be_used() -> bool:
 	return _can_be_used()
 
 func validate(data, state: Dictionary): # : IncomingData -> ExecutionResult
-	if _action_window:
+	if is_instance_valid(_action_window):
 		return _action_window.result(_validate_action(data, state))
 	return _validate_action(data, state)
 
