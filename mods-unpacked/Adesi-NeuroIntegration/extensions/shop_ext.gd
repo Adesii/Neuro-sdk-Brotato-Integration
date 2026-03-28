@@ -16,10 +16,12 @@ var go_next_wave = load("res://mods-unpacked/Adesi-NeuroIntegration/broactions/s
 
 
 var action_window
+var first_time : bool = true
 func _ready():
     ._ready()
 
     print("Entered Shop")
+
     update_shop_and_re_register()
 
 func _physics_process(delta):
@@ -32,7 +34,11 @@ func update_shop_and_re_register():
     action_window = Utils.ActionWindow.new(self)
     for action in get_all_updated_actions(action_window):
         action_window.add_action(action)
-    action_window.set_context("You are now in the Shop, it is wave %s and you have %s money to spend. When you are ready and think you can't improve your build anymore, use the go_next_wave action to start the next wave and leave the shop, any locked items will remain in the next shop" % [str(RunData.current_wave), str(RunData.get_player_gold(0))])
+    if first_time:
+        action_window.set_context("You are now in the Shop, it is wave %s and you have %s money to spend. When you are ready and think you can't improve your build anymore, use the go_next_wave action to start the next wave and leave the shop, any locked items will remain in the next shop. Current Reroll costs: %s money" % [str(RunData.current_wave), str(RunData.get_player_gold(0)),str(_reroll_price[0])])
+        first_time = false
+    else:
+        action_window.set_context("Re-rolled Shop, next reroll cost: %s, It is wave %s and you have %s money to spend, Use go_next_wave to leave the shop" % [str(_reroll_price[0]),str(RunData.current_wave), str(RunData.get_player_gold(0))])
     action_window.register()
 
 
