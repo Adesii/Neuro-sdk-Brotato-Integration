@@ -34,26 +34,12 @@ func _validate_action(data, state):
 	if not available.has(selected):
 		return ExecutionResult.failure(Strings.action_failed_invalid_parameter(["item"]))
 	state["item"] = find_item_button(selected)
+	if not is_instance_valid(state["item"]):
+		return ExecutionResult.mod_failure("couldn't find item info.")
 	return ExecutionResult.success()
 
-
 func _execute_action(state):
-	#state["item"].emit_signal("pressed")
-	var info_text = ""
-	if state["item"].item is WeaponData:
-		info_text = state["item"].item.get_weapon_stats_text(0)
-	else:
-		info_text = state["item"].item.get_effects_text(0)
-
-	regexr.compile("\\[.*?\\]") # this is a to remove all color info and image paths from the text.  [Color] or res://****.png
-
-	info_text = regexr.sub(info_text, "", true)
-
-	info_text = info_text.replace("res://items/stats/", " ")
-	info_text = info_text.replace(".png", ", ")
-
-	Context.send("tooltip for " + str(state["item"].item.get_name_text()) + ": \n" + str(info_text))
-
+	Context.send("tooltip for " + str(Utils.get_item_details(state["item"].item)))
 
 func get_item_names():
 	var names = []
